@@ -1,11 +1,13 @@
 from rest_framework import serializers
-from .models import Events, Registration
+from .models import Events, RegistrationModel
+
+# Event Serailizer
 class EventSerailizer(serializers.ModelSerializer):
     class Meta:
         model = Events
         fields = '__all__'
-class RegistraionSerailizer(serializers.ModelSerializer):
+# Register Serailizer 
+class RegisterSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Registration
-        fields  = '__all__'
-        
+        model = RegistrationModel
+        fields = '__all__'

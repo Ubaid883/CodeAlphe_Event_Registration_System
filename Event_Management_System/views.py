@@ -2,7 +2,7 @@ from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from .serializer import EventSerailizer, RegistraionSerailizer
-from .models import Events, Registration
+from .models import Events
 
 # Create your views here.
 # View End Point
@@ -15,13 +15,7 @@ def view_event(request):
     return Response(serailizer.data)
 
 # Register Event End point
-@api_view()
-def register_event(request):
-    #get all register data
-    data = Registration.objects.all()
-    #Convert Serializer data into Json
-    serailizer = RegistraionSerailizer(data, many=True)
-    return Response(serailizer.data)
+
     
     
     

@@ -10,10 +10,10 @@ class Events(models.Model):
     def __str__(self)->str:
         return self.title
 
-class Registration(models.Model):
-    user= models.CharField(max_length=50)
-    event = models.ForeignKey(Events, on_delete=models.CASCADE)
-    register_at = models.DateTimeField( auto_now_add=True)
+class RegistrationModel(models.Model):
+    name = models.CharField(max_length=50)
+    event = models.CharField(max_length=50)
+    date = models.DateTimeField( auto_now_add=True)
     
     def __str__(self)->str:
-        return self.user
+        return self.name
