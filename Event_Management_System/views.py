@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, HttpResponse
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from .serializer import EventSerailizer, RegisterSerializer
@@ -6,6 +6,8 @@ from .models import Events, RegistrationModel
 from rest_framework.views import APIView
 
 # Create your views here.
+def home(request):
+    return HttpResponse('<h1>Welcome To Event Management System</h1> ')
 # View End Point
 @api_view()
 def view_event(request):
@@ -23,7 +25,11 @@ class RegisterView(APIView):
         # convert register data into serailizer
         serializer = RegisterSerializer(data, many=True)
         return Response(serializer.data)
-
     
-    
+    def post(self, request):
+        serializer = RegisterSerializer(data= request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors)
     
