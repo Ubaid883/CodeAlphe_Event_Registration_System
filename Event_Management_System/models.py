@@ -6,14 +6,10 @@ class Events(models.Model):
     description = models.TextField()
     date = models.DateTimeField()
     location = models.CharField(max_length=255)
-    
-    def __str__(self)->str:
-        return self.title
 
+#Registeration Model
 class RegistrationModel(models.Model):
     name = models.CharField(max_length=50)
     event = models.CharField(max_length=50)
-    date = models.DateTimeField( auto_now_add=True)
+    date = models.DateTimeField(auto_now_add=False)
     
-    def __str__(self)->str:
-        return self.name
