@@ -5,11 +5,16 @@ from .serializer import EventSerailizer, RegisterSerializer
 from .models import Events, RegistrationModel
 from rest_framework.views import APIView
 from rest_framework import status
+from rest_framework.authentication import BasicAuthentication
+from rest_framework.permissions import IsAuthenticated
+
 # Create your views here.
 def home(request):
     return HttpResponse('<h1>Welcome To Event Management System</h1> ')
 
 class EventView(APIView):
+    authentication_classes = [BasicAuthentication]
+    permission_classes = [IsAuthenticated]
     #Get all Event's
     def get(self, request):
         query_set = Events.objects.all()
@@ -23,7 +28,8 @@ class EventView(APIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-            
+    
+        
 
 # Register Event Class based view
 class RegisterView(APIView):
