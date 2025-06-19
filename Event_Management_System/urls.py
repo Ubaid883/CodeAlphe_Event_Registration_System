@@ -1,10 +1,11 @@
-from .views import view_event, RegisterView, home
+from .views import EventView, RegisterView, home
 from django.urls import path
 
 urlpatterns = [
     path('', home, name='home'),
-    path('event', view_event, name='event'),
-    path('register',RegisterView.as_view(), name='register')
+    path('register',RegisterView.as_view(), name='register'),
+    path('event',EventView.as_view(), name='register'),
+    path('register/<int:pk>/',RegisterView.as_view())
 
     
     

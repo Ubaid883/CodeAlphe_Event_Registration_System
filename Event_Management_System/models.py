@@ -12,4 +12,4 @@ class RegistrationModel(models.Model):
     name = models.CharField(max_length=50)
     event = models.CharField(max_length=50)
     date = models.DateTimeField(auto_now_add=False)
-    
+   

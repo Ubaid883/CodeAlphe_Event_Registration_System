@@ -20,6 +20,6 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('Event_Management_System.urls')),
-    path('event/',include('Event_Management_System.urls')),
-    path('register/',include('Event_Management_System.urls'))
+    path('register/',include('Event_Management_System.urls')),
+    path('event/',include('Event_Management_System.urls'))
 ]
