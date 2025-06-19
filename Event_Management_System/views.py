@@ -33,6 +33,8 @@ class EventView(APIView):
 
 # Register Event Class based view
 class RegisterView(APIView):
+    authentication_classes = [BasicAuthentication]
+    permission_classes = [IsAuthenticated]
     # To View The Event 
     def get(self, request):
         #get all Registeration data
