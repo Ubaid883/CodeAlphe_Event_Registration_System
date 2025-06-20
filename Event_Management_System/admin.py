@@ -11,5 +11,6 @@ admin.site.register(RegistrationModel, RegisterAdmin)
 # Event Admin 
 class EventAdmin(admin.ModelAdmin):
    list_display = ['title','description','date','location']
+   
 admin.site.register(Events,  EventAdmin)
 

@@ -15,3 +15,6 @@ class Events(models.Model):
     date = models.DateTimeField()
     location = models.CharField(max_length=255)
     
+    def __str__(self):
+        return str(self.title)
+    
