@@ -77,7 +77,7 @@ WSGI_APPLICATION = 'CodeAlpha_Event_Registration_System.wsgi.application'
 DATABASES = {
             'default': {
                 'ENGINE': 'django.db.backends.postgresql',
-                'NAME': 'event_management',
+                'NAME': 'event-management',
                 'USER': 'postgres',
                 'PASSWORD': 'ubaid12',
                 'HOST': 'localhost',  # Or the IP address/hostname of your PostgreSQL server

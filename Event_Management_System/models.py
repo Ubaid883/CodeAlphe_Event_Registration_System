@@ -1,7 +1,4 @@
 from django.db import models
-
-# Create your models here.
-
 #Registeration Model
 class RegistrationModel(models.Model):
     Organization_name = models.CharField(max_length=50)
@@ -10,11 +7,9 @@ class RegistrationModel(models.Model):
    
 # Event Model 
 class Events(models.Model):
-    title = models.ForeignKey(RegistrationModel, on_delete=models.CASCADE)
+    title = models.CharField(max_length=50)
     description = models.TextField()
     date = models.DateTimeField()
     location = models.CharField(max_length=255)
     
-    def __str__(self):
-        return str(self.title)
     

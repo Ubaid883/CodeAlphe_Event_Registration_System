@@ -7,7 +7,7 @@ class EventSerailizer(serializers.ModelSerializer):
         model = Events
         fields = '__all__'
         
-        def data_validator(self, data):
+        def date_validator(self, data):
             if data['date'] == data['date']:
                 raise serializers.ValidationError ('date must be different')
             return data
