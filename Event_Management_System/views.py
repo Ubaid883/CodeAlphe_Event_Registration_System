@@ -6,7 +6,7 @@ from .models import Events, RegistrationModel
 from rest_framework.views import APIView
 from rest_framework import status
 from django.http import Http404
-from rest_framework.authentication import SessionAuthentication
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
 
 # Create your views here.
@@ -14,7 +14,7 @@ def home(request):
     return HttpResponse('<h1>Welcome To Event Management System</h1> ')
 
 class EventView(APIView):
-    authentication_classes = [SessionAuthentication]
+    authentication_classes = [BasicAuthentication]
     permission_classes = [IsAuthenticatedOrReadOnly]
     #Get all Event's
     def get(self, request):
@@ -33,10 +33,10 @@ class EventView(APIView):
         
 
 # Register Event Class based view
-class RegisterView(APIView):
-    authentication_classes = [SessionAuthentication]
+class RegisterListView(APIView):
+    authentication_classes = [BasicAuthentication]
     permission_classes = [IsAuthenticated]
-    # To View The Event 
+    # To View The Register
     def get(self, request):
         #get all Registeration data
         data = RegistrationModel.objects.all()
@@ -44,7 +44,7 @@ class RegisterView(APIView):
         serializer = RegisterSerializer(data, many=True)
         return Response(serializer.data)
     
-    # Create a Event
+    # Create a Register
     def post(self, request):
         serializer = RegisterSerializer(data= request.data)
         if serializer.is_valid():
@@ -52,7 +52,10 @@ class RegisterView(APIView):
             return Response(serializer.data)
         return Response(serializer.errors)
     
-    # delete particular event
+class RegisterDetailView(APIView):
+    authentication_classes = [BasicAuthentication]
+    permission_classes = [IsAuthenticated]   
+    # delete particular Register
     def delete(self, request, pk):
         query_set = RegistrationModel.objects.get(pk=pk)
         query_set.delete()
@@ -62,12 +65,10 @@ class RegisterView(APIView):
     def get_object(self, pk):
         try:
             return RegistrationModel.objects.get(pk=pk)
-        except:
-            RegistrationModel.DoesNotExist
-        raise Http404
-    
-    def get(self, request, pk, format=None):  # <-- Include `pk` here!
+        except RegistrationModel.DoesNotExist:
+            raise Http404
+
+    def get(self, request, pk):
         registration = self.get_object(pk)
         serializer = RegisterSerializer(registration)
         return Response(serializer.data)
-    
