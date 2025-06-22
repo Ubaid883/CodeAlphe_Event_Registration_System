@@ -22,5 +22,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',home,name='home'),
     path('event/', EventView.as_view(),name='event'),
-    path('register/', RegisterView.as_view(),name='register')
+    path('register/', RegisterView.as_view(),name='register'),
+    path('register/<int:pk>', RegisterView.as_view(),name='register'),
+
 ]

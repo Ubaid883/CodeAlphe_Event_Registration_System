@@ -5,6 +5,7 @@ from .serializer import EventSerailizer, RegisterSerializer
 from .models import Events, RegistrationModel
 from rest_framework.views import APIView
 from rest_framework import status
+from django.http import Http404
 from rest_framework.authentication import SessionAuthentication
 from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
 
@@ -57,11 +58,16 @@ class RegisterView(APIView):
         query_set.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
     
-    #get particular event
+    #get particular Register
     def get_object(self, pk):
         try:
             return RegistrationModel.objects.get(pk=pk)
-        except RegistrationModel.DoesNotExist:
-            raise Response(status=status.HTTP_400_BAD_REQUEST)
-        
+        except:
+            RegistrationModel.DoesNotExist
+        raise Http404
+    
+    def get(self, request, pk, format=None):  # <-- Include `pk` here!
+        registration = self.get_object(pk)
+        serializer = RegisterSerializer(registration)
+        return Response(serializer.data)
     
